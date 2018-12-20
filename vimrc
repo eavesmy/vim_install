@@ -5,7 +5,6 @@ set nu
 
 "允许折叠
 set foldenable
-set foldmethod=indent
 
 "显示status bar
 set laststatus=1
@@ -63,9 +62,15 @@ inoremap <c-l> <esc> $i
 
 "normal model
 nnoremap <tab> viw
-nnoremap ss :!svn ci
-nnoremap cc :!git commit
+
+nnoremap ga :!git add .
+nnoremap gs :!git status
+nnoremap gc :!git commit -m 'debug'
+nnoremap gp :!git push origin trade
+
 nnoremap "" ^i // <esc>
+nnoremap jshint :JSHint --config ~/Documents/config/jshintrc <enter>
+nnoremap sync :!sh ~/.scripts/syncBitKeep
 
 "statusline
 "set laststatus=2
@@ -91,12 +96,13 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'fatih/vim-go'
 Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'Chiel92/vim-autoformat'
 Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'szw/vim-tags'
+Plugin 'vim-scripts/taglist.vim'
 
 call vundle#end()
 
@@ -119,7 +125,7 @@ let g:go_fmt_autosave = 1
 "SETTING YouCompleteMe
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_min_num_identifier_candidate_chars = 0
-let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
 
 " 即时显示 markdown
 let g:instant_markdown_slow = 1
@@ -133,4 +139,5 @@ au BufNewFile,BufRead *.dart set filetype=dartlang
 au BufNewFile,BufRead *.ts set filetype=typescript
 
 "SETTING JShint
-let jshint2_save = 1
+" let jshint2_save = 1
+"autocmd BufWritePost *.js :!sh ~/.scripts/syncBitKeep
